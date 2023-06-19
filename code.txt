@@ -1,0 +1,61 @@
+#define BLYNK_TEMPLATE_ID "TMPL3pLNW7PhA"
+#define BLYNK_TEMPLATE_NAME "Iot project"
+#define BLYNK_AUTH_TOKEN "UoBWofZFolALBAjtxqucj-BQpterMLnS"
+
+
+#include <ESP8266WiFi.h> 
+#include <BlynkSimpleEsp8266.h>
+
+#include <DHT.h>
+
+
+
+
+char auth[] = BLYNK_AUTH_TOKEN;
+const char *ssid =  "OnePlus 9R";  // name of your wifi
+const char *pass =  "pandu123";  // password of your wifi
+
+BlynkTimer timer;
+
+int soil = A0;
+int sensorThreshold = 100;
+
+#define DHTPIN 2 //Connect Out pin to D2 in NODE MCU
+
+
+
+  Serial.println(t);
+  Blynk.virtualWrite(V1, h);
+  Blynk.virtualWrite(V0, t);
+    Serial.print("Temperature : ");
+    Serial.print(t);
+    Serial.print("    Humidity : ");
+    Serial.println(h);
+
+
+  }
+ 
+  soilR=analogRead(soil);  
+  Serial.println(soilR);
+  soilLevel=map(soilR, 0, 1024, 200,0); // adjust soil level here
+  Serial.println(soilLevel);
+  Blynk.virtualWrite(V2, soilLevel);
+  delay(1000);
+}
+void setup()
+{   
+
+  Serial.begin(115200);
+
+ 
+  dht.begin();
+ 
+  }
+
+void loop()
+{
+  Blynk.run();
+  timer.run();
+
+
+ }
